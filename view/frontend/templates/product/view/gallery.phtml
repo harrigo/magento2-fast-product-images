@@ -30,7 +30,7 @@
 		$mainMainImageTitle = '';
 		$mainThumbHtml = '';
 		$mainThumbHtmlcount = 0;
-		if(count($imagesData)>1){
+		if(count($imagesData)>0){
 			foreach($imagesData as $key=>$value){
 				if(isset($value['isMain']) && $value['isMain'] == 1){
 					$mainImage = $value['img'];
@@ -61,7 +61,7 @@
             </div>
             <div class="fotorama__stage__shaft" tabindex="0" data-gallery-role="stage-shaft" >
                 <div class="fotorama__stage__frame fotorama__active fotorama_vertical_ratio fotorama__loaded fotorama__loaded--img" aria-hidden="false" data-active="true" style="left: 0px;" href="<?php echo $mainImage; ?>">
-                    <img src="<?php echo $mainImage; ?>" alt="<?php echo $mainMainImageTitle; ?>" class="fotorama__img" aria-hidden="false">
+                    <img class="lazyload" src="<?php echo $mainImage; ?>" alt="<?php echo $mainMainImageTitle; ?>" class="fotorama__img" aria-hidden="false">
                     <div class="fotorama__caption" aria-hidden="true">
                     <div class="fotorama__caption__wrap"><?php echo $mainMainImageTitle; ?></div>
                     </div>
@@ -86,13 +86,13 @@
 				
                 <div class="fotorama__nav__shaft">
                     <div class="fotorama__thumb-border" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px); width: <?php echo $thumbwidth;?>px; height: <?php echo $thumbheight?>px;"></div>
-                     <?php echo $mainThumbHtml;?>
+                    <?php if(count($imagesData)>1): ?> <?php echo $mainThumbHtml;?><?php endif; ?>
                 </div>
-				<?php if(count($imagesData)>1): ?>
+				
                 <div class="fotorama__thumb__arr fotorama__thumb__arr--right fotorama__arr--disabled" role="button" aria-label="Next" data-gallery-role="arrow" tabindex = "-1">
                     <div class="fotorama__thumb--icon"></div>
                 </div>
-				<?php endif; ?>
+				
             </div>
         </div>
 		
