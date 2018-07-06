@@ -28,7 +28,7 @@
             $mainMainImageTitle = '';
             $mainThumbHtml = '';
             $mainThumbHtmlcount = 0;
-            if(count($imagesData)>0){
+            if(count($imagesData)>1){
                 foreach($imagesData as $key=>$value){
                     if(isset($value['isMain']) && $value['isMain'] == 1){
                         $mainImage = $value['img'];
@@ -49,13 +49,13 @@
                 }
 
             }
-        ?>
+    ?>
         
     <div class="fotorama-item" data-gallery-role="gallery">
     <div data-gallery-role="fotorama__focusable-start" tabindex="-1"></div>
     <div class="fotorama__wrap fotorama__wrap--css3 fotorama__wrap--slide fotorama__wrap--toggle-arrows">
         <div class="fotorama__stage" data-fotorama-stage="fotorama__stage" style="">
-            <div class="fotorama__arr fotorama__arr--prev" tabindex="0" role="button" aria-label="Previous" data-gallery-role="arrow">
+            <div class="fotorama__arr fotorama__arr--prev <?php echo (count($imagesData) > 1) ? "" : "fotorama__arr--disabled" ?>" tabindex="0" role="button" aria-label="Previous" data-gallery-role="arrow">
                 <div class="fotorama__arr__arr"></div>
             </div>
             <div class="fotorama__stage__shaft" tabindex="0" data-gallery-role="stage-shaft" >
@@ -66,7 +66,7 @@
                     </div>
                 </div>
             </div>
-            <div class="fotorama__arr fotorama__arr--next fotorama__arr--disabled" tabindex="-1" role="button"
+            <div class="fotorama__arr fotorama__arr--next <?php echo (count($imagesData) > 1) ? "" : "fotorama__arr--disabled" ?>" tabindex="-1" role="button"
                  aria-label="Next" data-gallery-role="arrow">
                 <div class="fotorama__arr__arr"></div>
             </div>
@@ -75,21 +75,26 @@
             <div class="fotorama__zoom-out" data-gallery-role="fotorama__zoom-out" aria-label="Zoom out" role="button" tabindex="0"></div>
             <!-- <div class="fotorama__spinner"></div> -->
         </div>
+		
         <div class="fotorama__nav-wrap" data-gallery-role="nav-wrap">
             <div class="fotorama__nav fotorama__nav--thumbs">
                 <div class="fotorama__fullscreen-icon" data-gallery-role="fotorama__fullscreen-icon" tabindex="0" aria-label="Exit fullscreen" role="button"></div>
                 <div class="fotorama__thumb__arr fotorama__thumb__arr--left fotorama__arr--disabled" role="button" aria-label="Previous" data-gallery-role="arrow" tabindex = "-1">
                     <div class="fotorama__thumb--icon"></div>
                 </div>
+				
                 <div class="fotorama__nav__shaft">
                     <div class="fotorama__thumb-border" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px); width: <?php echo $thumbwidth;?>px; height: <?php echo $thumbheight?>px;"></div>
                      <?php echo $mainThumbHtml;?>
                 </div>
+				<?php if(count($imagesData)>1): ?>
                 <div class="fotorama__thumb__arr fotorama__thumb__arr--right fotorama__arr--disabled" role="button" aria-label="Next" data-gallery-role="arrow" tabindex = "-1">
                     <div class="fotorama__thumb--icon"></div>
                 </div>
+				<?php endif; ?>
             </div>
         </div>
+		
     </div>
     <div data-gallery-role="fotorama__focusable-end" tabindex="-1"></div>
 </div>
@@ -187,5 +192,3 @@ require(['jquery'], function($){
         }
     }
 </script>
-
-
